@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>已选课程</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .nav a { margin-right: 15px; color: #3498db; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/students">👥 学生管理</a>
+        <a href="/courses">📚 课程管理</a>
+        <a href="/enroll">✅ 选课</a>
+    </div>
+
+    <h2>📋 学生已选课程（多表联查结果）</h2>
+
+    {% if records %}
+    <table>
+        <thead>
+            <tr>
+                <th>学生姓名</th>
+                <th>课程名称</th>
+                <th>学分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in records %}
+            <tr>
+                <td>{{ r.student_name }}</td>
+                <td>{{ r.course_title }}</td>
+                <td>{{ r.credit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>暂无选课记录。</p>
+    {% endif %}
+</body>
+</html>

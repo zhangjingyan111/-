@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>学生选课</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .nav a { margin-right: 15px; color: #3498db; text-decoration: none; }
+        form { margin-top: 20px; }
+        label { display: inline-block; width: 100px; }
+        select, button { padding: 6px; margin: 5px; }
+        button { background: #9b59b6; color: white; border: none; cursor: pointer; }
+        button:hover { background: #8e44ad; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/students">👥 学生管理</a>
+        <a href="/courses">📚 课程管理</a>
+        <a href="/my_courses">📋 已选课程</a>
+    </div>
+
+    <h2>✅ 学生选课</h2>
+    <form method="post" action="/do_enroll">
+        <p>
+            <label>选择学生:</label>
+            <select name="student_id" required>
+                <option value="">-- 请选择 --</option>
+                {% for s in students %}
+                <option value="{{ s.student_id }}">{{ s.name }} (ID: {{ s.student_id }})</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label>选择课程:</label>
+            <select name="course_id" required>
+                <option value="">-- 请选择 --</option>
+                {% for c in courses %}
+                <option value="{{ c.course_id }}">{{ c.title }} ({{ c.credit }}学分)</option>
+                {% endfor %}
+            </select>
+        </p>
+        <button type="submit">确认选课</button>
+    </form>
+
+    <p style="color: #7f8c8d; margin-top: 20px;">
+        ⚠️ 若学生已选该课程，系统将自动忽略重复操作。
+    </p>
+</body>
+</html>

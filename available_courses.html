@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>可选课程</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .nav a { margin-right: 15px; color: #3498db; text-decoration: none; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        button { background: #2ecc71; color: white; border: none; padding: 6px 12px; cursor: pointer; }
+        button:hover { background: #27ae60; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/students">👥 学生管理</a>
+        <a href="/courses">📚 课程管理</a>
+        <a href="/enroll">✅ 选课首页</a>
+    </div>
+
+    <h2>🎓 {{ student_name }} 的可选课程</h2>
+    <p>以下课程尚未选择，点击“选课”即可加入：</p>
+
+    {% if available_courses %}
+    <table>
+        <thead>
+            <tr>
+                <th>课程ID</th>
+                <th>课程名称</th>
+                <th>学分</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in available_courses %}
+            <tr>
+                <td>{{ c.course_id }}</td>
+                <td>{{ c.title }}</td>
+                <td>{{ c.credit }}</td>
+                <td>
+                    <form method="post" action="/select_course/{{ student_id }}/{{ c.course_id }}" style="display:inline;">
+                        <button type="submit">选课</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: #e74c3c;">❌ 该学生已选完所有课程，无可选课程。</p>
+    {% endif %}
+
+    <br>
+    <a href="/enroll">&larr; 返回选课首页</a>
+</body>
+</html>

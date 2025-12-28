@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑学生</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .nav a { margin-right: 15px; color: #3498db; text-decoration: none; }
+        form { margin-top: 20px; }
+        label { display: inline-block; width: 80px; }
+        input, select { padding: 5px; margin: 5px; }
+        button { padding: 8px 16px; background: #3498db; color: white; border: none; cursor: pointer; }
+        button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">🏠 首页</a>
+        <a href="/students">👥 返回学生列表</a>
+    </div>
+
+    <h2>✏️ 编辑学生信息</h2>
+    <form method="post">
+        <p><label>姓名:</label> <input type="text" name="name" value="{{ student.name }}" required></p>
+        <p>
+            <label>性别:</label>
+            <select name="gender" required>
+                <option value="M" {% if student.gender == 'M' %}selected{% endif %}>男</option>
+                <option value="F" {% if student.gender == 'F' %}selected{% endif %}>女</option>
+            </select>
+        </p>
+        <p><label>年龄:</label> <input type="number" name="age" value="{{ student.age }}" min="10" max="50" required></p>
+        <button type="submit">保存修改</button>
+        <a href="/students" style="margin-left: 10px;">取消</a>
+    </form>
+</body>
+</html>
